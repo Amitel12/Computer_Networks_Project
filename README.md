@@ -7,15 +7,8 @@ This repository contains a comprehensive networking project divided into two mai
 ---
 
 ## 📂 Project Structure
-├── Part 1 - Encapsulation/
-│   ├── Project_Part1.ipynb       # Jupyter Notebook for packet crafting simulation
-│   └── group02_http_input.csv    # Input data for the simulation
-│
-├── Part 2 - Chat Application/
-│   ├── server.py                 # Multi-threaded TCP Server
-│   └── client.py                 # GUI Client (Tkinter)
-│
-└── README.md
+<img width="682" height="175" alt="image" src="https://github.com/user-attachments/assets/ce0dd6ae-78a4-4159-a88f-1e098cb8c780" />
+
 
 Libraries: socket, threading, tkinter, scapy, pandas
 
@@ -26,18 +19,16 @@ Reads application messages from a CSV file (group02_http_input.csv).
 Uses Scapy (or raw sockets) to encapsulate data into TCP segments and IP packets.
 Sends packets over the local network interface (Loopback).
 Traffic is analyzed using Wireshark to verify headers, ports, and payloads.
+
 2️⃣ Part 2: TCP Chat Application (GUI)
 A robust client-server chat application designed with a modern, dark-themed GUI. It demonstrates socket programming, threading, and protocol design.
 
 Key Features
 Real-time Communication: Uses TCP sockets for reliable message delivery.
-
 Multi-User Support: The server handles multiple clients simultaneously using threads.
-
 Private Messaging (Unicast): Click on a user's name to switch to a private conversation.
 
 Status Indicators:
-
 🟢 Green Dot: User is online.
 <img width="940" height="300" alt="image" src="https://github.com/user-attachments/assets/81817f88-4163-4537-b11a-a9b16fe0b29b" />
 

@@ -11,6 +11,7 @@ This repository contains a comprehensive networking project divided into two mai
 <img width="682" height="175" alt="image" src="https://github.com/user-attachments/assets/ce0dd6ae-78a4-4159-a88f-1e098cb8c780" />
 
 Libraries: socket, threading, tkinter, scapy, pandas
+
 ---
 
 ## 1️⃣ Part 1: Encapsulation Simulation & Analysis
@@ -51,34 +52,67 @@ A robust client-server chat application designed with a modern, dark-themed GUI.
 ## 🚀 How to Run (Step-by-Step)
 
 ### 🪟 Windows Instructions
-1. Prerequisites: Ensure Python 3.x is installed. Install required libraries via terminal:
-   pip install scapy pandas
-2. Start the Server:
-   - Open Command Prompt or PowerShell.
-   - Navigate to the project folder.
-   - Run: python server.py
-3. Launch Clients:
-   - Open a new Command Prompt for each user.
-   - Run: python client.py
-   - In the GUI: Enter Server's IPv4 as the Server IP and choose a username.
+1. **Prerequisites**: Ensure Python 3.x is installed. Install required libraries:
+   `pip install scapy pandas`
+2. **Step 1: Start the Server**:
+   - Open Command Prompt or PowerShell in the project folder.
+   - Run the command: `python server.py`
+   - **Expected Output**: `Server running on 0.0.0.0:10000...`
+   - ⚠️ **Note**: Do not close this window! Closing it will stop the entire chat system.
+3. **Step 2: Launch Clients**:
+   - Open a new terminal window for each user.
+   - Run: `python client.py`
+   - In the login screen: Enter the **Server's IPv4 Address** (e.g., 192.168.x.x).
+   - *(Note: Use `127.0.0.1` only if the server and client are on the same machine for testing).*
 
 ### 🍎 macOS Instructions
-1. Prerequisites: Ensure Python 3.x is installed (usually via brew install python). Install libraries:
-   pip3 install scapy pandas
-2. Start the Server:
+1. **Prerequisites**: Ensure Python 3.x is installed. Install libraries:
+   `pip3 install scapy pandas`
+2. **Step 1: Start the Server**:
+   - Open Terminal in the project folder.
+   - Run: `python3 server.py`
+   - ⚠️ **Note**: Keep this Terminal tab open at all times.
+3. **Step 2: Launch Clients**:
+   - Open a new Terminal tab (`Cmd + T`) for each user.
+   - Run: `python3 client.py`
+   - Enter the **Server's IPv4 Address** and your username.
+
+### 🐧 Linux Instructions
+1. **Prerequisites**: Install Python3 and Tkinter (often required separately on Linux):
+   `sudo apt update && sudo apt install python3-tk`
+   `pip3 install scapy pandas`
+2. **Step 1: Start the Server**:
    - Open Terminal.
-   - Navigate to the project folder.
-   - Run: python3 server.py
-3. Launch Clients:
-   - Open a new Terminal tab (Cmd + T) for each user.
-   - Run: python3 client.py
-   - Note: You may need to grant Terminal "Accessibility" permissions if the GUI doesn't appear immediately.
-4. Permissions: If using Scapy (Part 1), run with sudo:
-   sudo python3 encapsulation_script.py
+   - Run: `python3 server.py`
+3. **Step 2: Launch Clients**:
+   - Run: `python3 client.py`
+   - Enter the **Server's IPv4 Address** in the login field.
+4. **Permissions**: Part 1 (Scapy) requires root privileges to send raw packets:
+   `sudo python3 encapsulation_script.py`
+
+---
+
+## 🛠️ Troubleshooting
+
+* **Finding the Server IP**:
+    - **Windows**: Run `ipconfig` in CMD. Look for `IPv4 Address`.
+    - **macOS/Linux**: Run `ifconfig` or `ip a` in Terminal. Look for `inet` under your active interface (e.g., `en0` or `eth0`).
+* **"Address already in use" Error**:
+    - This happens if a previous instance of the server is still running. Close all terminals and wait 5 seconds before restarting.
+* **Connection Refused**:
+    - Ensure the Server is running **before** you launch the Client.
+    - Check that the Client is using the correct IPv4 address of the host machine.
+* **Firewall Issues**:
+    - Ensure your firewall allows Python to communicate over Port 10000. On Linux, you may need: `sudo ufw allow 10000/tcp`.
 
 ---
 
 ## 💬 Usage Tips
-* Private Chat: Click a name in the sidebar. The header will change from # General Chat to @ Username.
-* Notifications: If you see a number in parentheses, e.g., Omer (2), it means you have 2 unread private messages from that user.
-* Testing Reconnection: Close a client window and log back in with the same name; the chat will announce your return.
+* **Private Chat**: Click a name in the sidebar. The header will change from `# General Chat` to `@ Username`.
+* **Notifications**: If you see a number in parentheses, e.g., `Omer (2)`, it means you have unread messages.
+* **Reconnection**: Log back in with the same name to see the "Reconnected" status in action.
+  
+---
+## 👥 Authors
+* **Amit Almaliach**
+* **Amir Macktin**

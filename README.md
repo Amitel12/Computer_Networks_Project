@@ -1,41 +1,51 @@
-# 📡 TCP/IP Networking Project: Encapsulation & Chat Application
-
+📡 TCP/IP Networking Project: Encapsulation & Chat Application
 This repository contains a comprehensive networking project divided into two main parts:
-1.  **Network Encapsulation Analysis:** A simulation of the TCP/IP stack using Python and Wireshark.
-2.  **TCP Chat System:** A fully functional, multi-threaded GUI chat application supporting private messaging and real-time status updates.
 
----
+Network Encapsulation Analysis: A simulation of the TCP/IP stack using Python and Wireshark.
 
-## 📂 Project Structure
+TCP Chat System: A fully functional, multi-threaded GUI chat application supporting private messaging, real-time status updates, and session persistence.
+
+📂 Project Structure
 <img width="682" height="175" alt="image" src="https://github.com/user-attachments/assets/ce0dd6ae-78a4-4159-a88f-1e098cb8c780" />
-
 
 Libraries: socket, threading, tkinter, scapy, pandas
 
 1️⃣ Part 1: Encapsulation Simulation & Analysis
 In this section, we manually craft TCP/IP packets based on application data (HTTP messages) to demonstrate how encapsulation works in the network stack.
+
 Features
-Reads application messages from a CSV file (group02_http_input.csv).
-Uses Scapy (or raw sockets) to encapsulate data into TCP segments and IP packets.
-Sends packets over the local network interface (Loopback).
-Traffic is analyzed using Wireshark to verify headers, ports, and payloads.
+Data Injection: Reads application messages from a CSV file (group02_http_input.csv).
+
+Manual Stack Construction: Uses Scapy to encapsulate raw data into TCP segments and IP packets.
+
+Network Transmission: Sends packets over the local network interface (Loopback).
+
+Deep Packet Inspection: Traffic is analyzed using Wireshark to verify headers, checksums, ports, and payloads.
 
 2️⃣ Part 2: TCP Chat Application (GUI)
-A robust client-server chat application designed with a modern, dark-themed GUI. It demonstrates socket programming, threading, and protocol design.
+A robust client-server chat application designed with a modern, dark-themed GUI. It demonstrates advanced socket programming, concurrent threading, and custom protocol design.
 
 Key Features
-Real-time Communication: Uses TCP sockets for reliable message delivery.
-Multi-User Support: The server handles multiple clients simultaneously using threads.
-Private Messaging (Unicast): Click on a user's name to switch to a private conversation.
+Real-time Communication: Uses TCP sockets for reliable, ordered message delivery.
 
-Status Indicators:
-🟢 Green Dot: User is online.
-<img width="940" height="300" alt="image" src="https://github.com/user-attachments/assets/81817f88-4163-4537-b11a-a9b16fe0b29b" />
+Multi-User Architecture: The server manages multiple clients simultaneously using unique threads for each connection.
 
-🔴 Red Dot: User has disconnected.
-<img width="940" height="287" alt="image" src="https://github.com/user-attachments/assets/0c4c4f1c-8ebe-460d-ba26-c8a40823073e" />
+Private Messaging (Unicast): Direct messaging support. Simply click a user's name in the sidebar to switch from General Chat to a private room.
 
-Unread Counters: Visual notification (N) next to users who sent messages while you were in a different chat room.
-<img width="392" height="238" alt="image" src="https://github.com/user-attachments/assets/09b5eccc-bd6d-4f1d-83a5-bdbb09e185a2" />
+Identity & Connection Management
+Duplicate Name Protection: The server prevents multiple logins with the same username. If a name is already active, the client receives a "Username Taken" error and is denied access.
 
-History Management: Chat history is saved separately for every user and the General Chat.
+Reconnection Logic: The system recognizes returning users. If a user disconnects and joins again, they are greeted with a "Reconnected" status, and the server broadcasts their return to the chat.
+
+Thread-Safe Registration: The server handles incoming connections concurrently, ensuring that name checks and registrations are handled safely even during simultaneous login attempts.
+
+Visual Status & UI
+Dynamic Sidebar:
+
+🟢 Green Dot: User is currently online and active.
+
+⚪ Grey Dot: User has disconnected but remains in the known users list.
+
+Unread Message Counters: Visual notifications (N) appear next to usernames when messages are received in a background chat room.
+
+History Management: Chat history is locally cached and separated between the General Chat and individual private conversations.

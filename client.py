@@ -79,18 +79,27 @@ class ChatClient:
 
         try:
             self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self.sock.settimeout(2)
+            self.sock.settimeout(3)
             self.sock.connect((ip, DEFAULT_PORT))
-            self.sock.settimeout(None)
-            self.sock.sendall(user.encode())
 
+            self.sock.sendall(user.encode('utf-8'))
+            response = self.sock.recv(1024).decode('utf-8')
+
+            if response == "Username taken":
+                messagebox.showerror("Login Error", f"The username '{user}' is already taken.")
+                self.sock.close()
+                return
+
+            self.sock.settimeout(None)
             self.username = user
             self.setup_chat_ui()
+
+            if "Welcome back" in response:
+                self.save_to_history("General Chat", "System", response, False)
 
         except Exception as e:
             messagebox.showerror("Connection Failed", f"Could not connect to {ip}:{DEFAULT_PORT}")
             return
-
     def setup_chat_ui(self):
         self.login_frame.destroy()
         self.main_chat_layout.pack(fill=tk.BOTH, expand=True)
@@ -154,7 +163,7 @@ class ChatClient:
 
     def on_sidebar_click(self, event):
         """מטפל בלחיצה על רשימת המשתמשים החדשה"""
-        # מציאת השורה שעליה לחצו
+
         try:
             index = self.users_sidebar.index(f"@{event.x},{event.y}")
             line_content = self.users_sidebar.get(index + " linestart", index + " lineend").strip()
